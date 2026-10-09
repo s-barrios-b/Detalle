@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFF9F5;
+  --foreground: #4A1525;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-romantic-rose: #FFE5EC;
+  --color-romantic-blush: #FFC2D1;
+  --color-romantic-pink: #FFB3C6;
+  --color-romantic-deep: #FF8FAB;
+  --color-romantic-wine: #800020;
+  --color-romantic-burgundy: #58111A;
+  --color-romantic-gold: #D4AF37;
+  --color-romantic-cream: #FFF9F5;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-dancing: var(--font-dancing);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #FFE5EC;
+}
+::-webkit-scrollbar-thumb {
+    background: #FF8FAB;
+    border-radius: 4px;
+}
+
+/* Envelope Animation Styles */
+.envelope-wrapper {
+    perspective: 1000px;
+}
+
+.envelope {
+    position: relative;
+    background-color: #f7a8b8;
+    transition: transform 0.6s ease-in-out;
+    box-shadow: 0 10px 25px rgba(128, 0, 32, 0.15);
+}
+
+.envelope::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 130px solid #f28da3;
+    transform-origin: top;
+    transition: transform 0.5s ease 0.3s, z-index 0.2s ease 0.3s;
+    z-index: 3;
+}
+
+@media (min-width: 640px) {
+    .envelope::before {
+        border-left-width: 240px;
+        border-right-width: 240px;
+        border-top-width: 180px;
+    }
+}
+
+.envelope.open::before {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.letter {
+    transition: transform 0.6s ease-in-out 0.4s, opacity 0.5s ease 0.3s;
+}
+
+/* Polaroid Effect */
+.polaroid {
+    background: white;
+    padding: 12px 12px 24px 12px;
+    box-shadow: 0 10px 20px rgba(88, 17, 26, 0.1);
+    transition: all 0.3s ease;
+}
+.polaroid:hover {
+    transform: translateY(-8px) rotate(1deg);
+    box-shadow: 0 15px 30px rgba(88, 17, 26, 0.2);
 }
