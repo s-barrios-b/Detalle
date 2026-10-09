@@ -25,71 +25,85 @@ export function LoveLetter() {
       </p>
 
       {/* 
-        Contenedor con altura suficiente.
-        En móvil usamos 650px para la separación vertical.
-        En PC usamos 320px para la separación horizontal y el ligero drop.
+        Contenedor dinámico (Acordeón).
+        Su altura se adapta al estado del sobre para no dejar espacios muertos.
       */}
-      <div className="relative w-full flex justify-center items-center h-[650px] lg:h-[320px] mt-8 mb-8 overflow-visible">
-        
+      <motion.div
+        className="relative w-full flex justify-center items-center mt-8 mb-8 overflow-visible"
+        animate={{
+          height: isOpen
+            ? (isDesktop ? [260, 520, 520, 520] : [200, 650, 650, 650])
+            : (isDesktop ? [520, 520, 520, 260] : [650, 650, 650, 200])
+        }}
+        transition={{
+          duration: 1.5,
+          times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1],
+          ease: "easeInOut"
+        }}
+      >
+
         {/* Envelope Container con preserve-3d para ordenamiento Z perfecto */}
-        <motion.div 
-          className="relative w-[300px] sm:w-[400px] h-[200px] sm:h-[260px] cursor-pointer z-20"
+        <motion.div
+          className="relative w-75 sm:w-100 h-50 sm:h-65 cursor-pointer z-20"
           style={{ transformStyle: "preserve-3d", perspective: 1500 }}
           animate={
-            isOpen 
+            isOpen
               ? {
-                  x: isDesktop ? [0, 0, 0, -220] : [0, 0, 0, 0],
-                  // Baja en ambos para que la solapa no tape el título
-                  y: isDesktop ? [0, 100, 100, 100] : [0, 180, 180, 180],
-                }
+                x: isDesktop ? [0, 0, 0, -220] : [0, 0, 0, 0],
+                // Ya no forzamos el 'y' porque el crecimiento del contenedor padre lo empuja naturalmente
+                y: [0, 0, 0, 0],
+              }
               : {
-                  x: isDesktop ? [-220, 0, 0, 0] : [0, 0, 0, 0],
-                  y: isDesktop ? [100, 100, 100, 0] : [180, 180, 180, 0],
-                }
+                x: isDesktop ? [-220, 0, 0, 0] : [0, 0, 0, 0],
+                y: [0, 0, 0, 0],
+              }
           }
-          transition={{ 
-            duration: 1.5, 
-            times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1], 
-            ease: "easeInOut" 
+          transition={{
+            duration: 1.5,
+            times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1],
+            ease: "easeInOut"
           }}
           onClick={() => setIsOpen(!isOpen)}
         >
           {/* Envelope Back (Inside) - Al fondo en el espacio 3D */}
-          <div 
-            className="absolute inset-0 bg-[#e68a9f] rounded-b-md shadow-inner" 
-            style={{ transform: "translateZ(-10px)" }} 
+          <div
+            className="absolute inset-0 bg-[#e68a9f] rounded-b-md shadow-inner"
+            style={{ transform: "translateZ(-10px)" }}
           />
 
           {/* The Letter */}
           <motion.div
-            className="absolute left-3 right-3 sm:left-5 sm:right-5 top-3 bottom-3 bg-white p-5 sm:p-6 rounded-md shadow-2xl border border-romantic-blush flex flex-col justify-start items-center overflow-y-auto overflow-x-hidden"
+            className="absolute left-3 right-3 sm:left-5 sm:right-5 top-3 bg-white p-5 sm:p-6 rounded-md shadow-2xl border border-romantic-blush flex flex-col justify-start items-center overflow-y-auto overflow-x-hidden"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: '#FF8FAB transparent',
+              transformOrigin: 'bottom center', // Para que el doblez se sienta desde la base
             }}
-            initial={{ y: 0, x: 0, z: 10, scale: 1 }}
+            initial={{ y: 0, x: 0, z: 10, rotateX: 0, height: isDesktop ? 236 : 176 }}
             animate={
-              isOpen 
-                ? { 
-                    y: isDesktop ? [0, 0, -240, 0] : [0, 0, -200, -360], 
-                    x: isDesktop ? [0, 0, 0, 440] : [0, 0, 0, 0],
-                    // Sale del bolsillo (z:10) y pasa al frente de todo (z:30)
-                    z: [10, 10, 30, 30],
-                    rotateZ: isDesktop ? [0, 0, 0, 2] : [0, 0, 0, 0],
-                    scale: [1, 1, 1, 1.05]
-                  }
-                : { 
-                    y: isDesktop ? [0, -240, 0, 0] : [-360, -200, 0, 0], 
-                    x: isDesktop ? [440, 0, 0, 0] : [0, 0, 0, 0],
-                    z: [30, 30, 10, 10],
-                    rotateZ: [isDesktop ? 2 : 0, 0, 0, 0],
-                    scale: [1.05, 1, 1, 1]
-                  }
+              isOpen
+                ? {
+                  // Se compensa la falta de movimiento del sobre con -140 (PC) y -180 (Móvil)
+                  y: isDesktop ? [0, 0, -240, -140] : [0, 0, -200, -180],
+                  x: isDesktop ? [0, 0, 0, 480] : [0, 0, 0, 0],
+                  z: [10, 10, 30, 30],
+                  rotateZ: isDesktop ? [0, 0, 0, 2] : [0, 0, 0, 0],
+                  rotateX: [0, 0, 0, 0],
+                  height: isDesktop ? [236, 236, 236, 450] : [176, 176, 176, 340]
+                }
+                : {
+                  y: isDesktop ? [-140, -240, 0, 0] : [-180, -200, 0, 0],
+                  x: isDesktop ? [480, 0, 0, 0] : [0, 0, 0, 0],
+                  z: [30, 30, 10, 10],
+                  rotateZ: [isDesktop ? 2 : 0, 0, 0, 0],
+                  rotateX: [0, -25, 0, 0],
+                  height: isDesktop ? [450, 236, 236, 236] : [340, 176, 176, 176]
+                }
             }
-            transition={{ 
-              duration: 1.5, 
-              times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1], 
-              ease: "easeInOut" 
+            transition={{
+              duration: 1.5,
+              times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1],
+              ease: "easeInOut"
             }}
             onClick={(e) => {
               if (isOpen) {
@@ -98,7 +112,7 @@ export function LoveLetter() {
             }}
           >
             <div className="text-right text-[10px] text-romantic-wine font-medium w-full mb-2">
-              Medellín • 6 Meses
+              Barranquilla • 6 Meses
             </div>
             <h3 className="font-dancing text-2xl sm:text-3xl text-romantic-burgundy font-bold mb-3">
               Mi vida entera,
@@ -116,7 +130,7 @@ export function LoveLetter() {
               Con todo mi amor. 💕
             </p>
 
-            <button 
+            <button
               onClick={(e) => {
                 e.stopPropagation();
                 setIsOpen(false);
@@ -128,27 +142,27 @@ export function LoveLetter() {
           </motion.div>
 
           {/* Envelope Front (Left, Right, Bottom CSS triangles) - Al frente del bolsillo */}
-          <div 
+          <div
             className="absolute inset-0 pointer-events-none rounded-b-md overflow-hidden"
             style={{ transform: "translateZ(20px)" }}
           >
             {/* Bottom Flap */}
             <div className="absolute bottom-0 w-0 h-0 
-              border-l-[150px] sm:border-l-[200px] border-l-transparent
-              border-r-[150px] sm:border-r-[200px] border-r-transparent
-              border-b-[120px] sm:border-b-[160px] border-b-[#f49bb0]" />
-              
+              border-l-150 sm:border-l-200 border-l-transparent
+              border-r-150 sm:border-r-200 border-r-transparent
+              border-b-120 sm:border-b-160 border-b-[#f49bb0]" />
+
             {/* Left Flap */}
             <div className="absolute top-0 left-0 w-0 h-0 
-              border-t-[100px] sm:border-t-[130px] border-t-transparent
-              border-b-[100px] sm:border-b-[130px] border-b-transparent
-              border-l-[150px] sm:border-l-[200px] border-l-[#f9a6b9]" />
-              
+              border-t-100 sm:border-t-130 border-t-transparent
+              border-b-100 sm:border-b-130 border-b-transparent
+              border-l-150 sm:border-l-200 border-l-[#f9a6b9]" />
+
             {/* Right Flap */}
             <div className="absolute top-0 right-0 w-0 h-0 
-              border-t-[100px] sm:border-t-[130px] border-t-transparent
-              border-b-[100px] sm:border-b-[130px] border-b-transparent
-              border-r-[150px] sm:border-r-[200px] border-r-[#f9a6b9]" />
+              border-t-100 sm:border-t-130 border-t-transparent
+              border-b-100 sm:border-b-130 border-b-transparent
+              border-r-150 sm:border-r-200 border-r-[#f9a6b9]" />
           </div>
 
           {/* Envelope Top Flap */}
@@ -161,38 +175,38 @@ export function LoveLetter() {
                 // Cuando cierra, vuelve a pasar al frente (z:40) para tapar la carta y el frente
                 : { rotateX: [180, 180, 180, 0], z: [5, 5, 5, 40] }
             }
-            transition={{ 
-              duration: 1.5, 
-              times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1], 
-              ease: "easeInOut" 
+            transition={{
+              duration: 1.5,
+              times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1],
+              ease: "easeInOut"
             }}
             style={{ transformOrigin: "top" }}
             className="absolute top-0 left-0 right-0 pointer-events-none flex flex-col items-center"
           >
             {/* Triangle pointing down */}
             <div className="w-0 h-0 
-              border-l-[150px] sm:border-l-[200px] border-l-transparent
-              border-r-[150px] sm:border-r-[200px] border-r-transparent
-              border-t-[120px] sm:border-t-[150px] border-t-[#f28da3] drop-shadow-md" />
-            
+              border-l-150 sm:border-l-200 border-l-transparent
+              border-r-150 sm:border-r-200 border-r-transparent
+              border-t-120 sm:border-t-150 border-t-[#f28da3] drop-shadow-md" />
+
             {/* Wax Seal */}
-            <motion.div 
+            <motion.div
               animate={
                 isOpen
                   ? { opacity: [1, 0, 0, 0] }
                   : { opacity: [0, 0, 0, 1] }
               }
-              transition={{ 
-                duration: 1.5, 
+              transition={{
+                duration: 1.5,
                 times: isOpen ? [0, 0.2, 0.5, 1] : [0, 0.5, 0.8, 1],
               }}
-              className="absolute top-[100px] sm:top-[130px] w-12 h-12 bg-romantic-wine text-white rounded-full flex items-center justify-center shadow-lg border-2 border-romantic-gold pointer-events-auto hover:scale-110 transition-transform"
+              className="absolute top-25 sm:top-32.5 w-12 h-12 bg-romantic-wine text-white rounded-full flex items-center justify-center shadow-lg border-2 border-romantic-gold pointer-events-auto hover:scale-110 transition-transform"
             >
               <span className="text-xl">❤️</span>
             </motion.div>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }
