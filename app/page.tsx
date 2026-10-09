@@ -22,7 +22,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="flex flex-col justify-center items-center text-center px-4 relative pt-32 pb-16 z-10"
+        className="flex flex-col justify-center items-center text-center px-4 relative pt-32 pb-8 z-10"
       >
         <div className="max-w-3xl mx-auto space-y-6">
           <motion.span 
@@ -51,7 +51,7 @@ export default function Home() {
             className="pt-6"
           >
             <p className="text-xs uppercase tracking-widest text-romantic-wine font-semibold mb-3">
-              Llevamos Compartiendo Sonrisas:
+              Tiempo para nuestros 6 meses:
             </p>
             <Countdown />
           </motion.div>
@@ -77,7 +77,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8 }}
-        className="py-20 px-4 max-w-4xl mx-auto text-center z-10 relative"
+        className="py-8 px-4 max-w-4xl mx-auto text-center z-10 relative"
       >
         <LoveLetter />
       </motion.section>
