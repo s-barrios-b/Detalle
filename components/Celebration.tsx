@@ -25,7 +25,7 @@ export function Celebration() {
       <div className="pt-4">
         <button
           onClick={triggerLoveSurprise}
-          className="px-10 py-5 bg-gradient-to-r from-romantic-deep to-romantic-wine text-white text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-110 transition duration-300 border-2 border-white"
+          className="px-10 py-5 bg-linear-to-r from-romantic-deep to-romantic-wine text-white text-lg font-semibold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-110 transition duration-300 border-2 border-white"
         >
           Haz clic para recibir un Abrazo y Beso Virtual 💋
         </button>
