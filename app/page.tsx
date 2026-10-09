@@ -51,7 +51,7 @@ export default function Home() {
             className="pt-6"
           >
             <p className="text-xs uppercase tracking-widest text-romantic-wine font-semibold mb-3">
-              Tiempo para nuestros 6 meses:
+              Nuestro Tiempo Juntos:
             </p>
             <Countdown />
           </motion.div>

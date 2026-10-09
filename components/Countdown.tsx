@@ -11,18 +11,14 @@ export function Countdown() {
   });
 
   useEffect(() => {
-    // La meta: Mañana a las 00:00 (10 de octubre de 2026 a las 12:00 AM hora local)
-    const targetDate = new Date("2026-10-10T00:00:00-05:00");
+    // Su fecha de inicio real: 10 de Abril de 2026 a las 00:00
+    // Al contar hacia arriba desde esta fecha, reflejará el tiempo exacto que "ya es".
+    const startDate = new Date("2026-04-10T00:00:00-05:00");
 
     const timer = setInterval(() => {
       const now = new Date();
-      const diff = targetDate.getTime() - now.getTime();
-
-      if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: "00", minutes: "00", seconds: "00" });
-        clearInterval(timer);
-        return;
-      }
+      // Contar hacia arriba: cuánto tiempo ha pasado desde su inicio
+      const diff = now.getTime() - startDate.getTime();
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
