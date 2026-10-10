@@ -115,19 +115,28 @@ export function LoveLetter() {
               Barranquilla • 6 Meses
             </div>
             <h3 className="font-dancing text-2xl sm:text-3xl text-romantic-burgundy font-bold mb-3">
-              Mi vida entera,
+              Mi amor,
             </h3>
-            <p className="text-gray-700 text-xs sm:text-sm leading-relaxed mb-3 w-full">
-              Hoy cumplimos 6 meses juntos y no puedo evitar sonreír al pensar en todo lo que hemos vivido. En este medio año me has demostrado lo hermoso que es compartir la vida con alguien tan especial, atento y único como tú.
+            <p className="text-gray-700 text-[10px] sm:text-xs leading-relaxed mb-4 w-full text-center">
+              Te escribo esta carta porque es la manera más dulce y sincera que encuentro para decirte que en ti encontré amor, lealtad, cariño y honestidad. No sé si estamos destinados a estar juntos, tampoco sé cuánto tiempo Dios tiene destinado que duremos, pero quiero decirte que todos estos meses han sido muy especiales para mí. Lo que sí sé es que, mientras estemos juntitos, vamos a hacer que nuestros momentos sean increíbles e inolvidables.
             </p>
-            <p className="text-gray-700 text-xs sm:text-sm leading-relaxed mb-3 w-full">
-              Gracias por cada abrazo reconfortante, por las risas espontáneas, por aguantar mis días difíciles y por hacer que los días cotidianos se sientan como una aventura mágica.
+            <p className="text-gray-700 text-[10px] sm:text-xs leading-relaxed mb-4 w-full text-center">
+              Quiero agradecerte por estar siempre para mí, no te llegas a imaginar todo lo que lo valoro. Cada vez que estoy contigo, me siento muy afortunada de tenerte en mi vida.
             </p>
-            <p className="text-gray-700 text-xs sm:text-sm leading-relaxed w-full">
-              Estos 6 meses son solo el comienzo de todo lo lindo que nos espera. Te amo con todo mi corazón.
+            <p className="text-gray-700 text-[10px] sm:text-xs leading-relaxed mb-4 w-full text-center">
+              Nunca llegué a pensar que podía encontrarme con una personita tan espectacular en todos los sentidos, con la que pudiera hablar de cualquier tema (por más incómodo que sea), que me enseñara cosas nuevas y, sobre todo, que estuviera dispuesto a hacer cualquier cosa por estar conmigo (así sea para verme cinco minutos 🥹).
             </p>
-            <p className="font-dancing text-xl sm:text-2xl text-romantic-wine text-right w-full mt-4">
-              Con todo mi amor. 💕
+            <p className="text-gray-700 text-[10px] sm:text-xs leading-relaxed mb-4 w-full text-center">
+              Quiero aprovechar este momento para contarte lo feliz que soy de poder decir que eres mi novio y, más que eso, mi mejor amigo. Deseo que, con el favor de Diosito, podamos permanecer juntitos por mucho tiempo y con un amor incondicional. (Espero esto no te parezca muy cliché de mi parte, JAJAJAJA 😂😅).
+            </p>
+            <p className="text-gray-700 text-[10px] sm:text-xs leading-relaxed mb-4 w-full text-center">
+              Te adoro muchísimo, cielito mío. 👩🏽‍❤️‍👨🏼❤️✨
+            </p>
+            <p className="text-gray-700 text-[10px] sm:text-xs leading-relaxed mb-4 w-full text-left">
+              Tu negrita 💌❤️‍🩹💘
+            </p>
+            <p className="font-dancing text-xl sm:text-2xl text-romantic-wine text-center w-full mt-4">
+              Kiss kiss 💋💋✨✨
             </p>
 
             <button
